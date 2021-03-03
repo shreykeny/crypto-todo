@@ -21,7 +21,10 @@ class App extends Component {
       taskCount : '0',
       tasks : [],
       loading : true, 
-      portis : null
+      portis : null,
+      friend1 : '',
+      friend2 : '', 
+      friend3 : ''
     }
 
     this.addTask = this.addTask.bind(this);
@@ -29,7 +32,10 @@ class App extends Component {
 
   }
 
+
+
   componentDidMount() {
+    
 
 
     this.loadBlockchainData();
@@ -37,10 +43,12 @@ class App extends Component {
 
   async loadBlockchainData() {
 
-
     const portis = new Portis('faad537b-c4a3-428f-b24e-6c1767c4e624', 'goerli');
  
     const web3 = new Web3(portis.provider);
+
+    // portis.showPortis();
+
 
     // this.setState({portis});
 
@@ -50,10 +58,10 @@ class App extends Component {
 
 
     // const web3 = new Web3(window.ethereum)
-    window.ethereum.enable().catch(error => {
-        // User denied account access
-        console.log(error)
-    })
+    // window.ethereum.enable().catch(error => {
+    //     // User denied account access
+    //     console.log(error)
+    // })
 
     const network = await web3.eth.net.getNetworkType();
    
@@ -84,17 +92,34 @@ class App extends Component {
 
    this.setState({taskCount : taskCount});
 
-   for (let i = 0 ; i < this.state.taskCount; i++) {
+   for (let i = 1 ; i <= this.state.taskCount; i++) {
      const task = await todoList.methods.tasks(i).call();
 
      this.setState({
        tasks : [...this.state.tasks, task]
      })
 
-     console.log(task)
    }
 
-  //  console.log(this.state.tasks);
+   console.log(this.state.tasks);
+
+  // for (let i = 1 ; i <= this.state.taskCount; i++) {
+
+  //   let data = {};
+
+  //   for (let j = 0 ; j < 3 ; j ++ ) {
+  //   const status = await todoList.methods.friendAddress(i, this.state.tasks[i - 1]).call();
+  //   data[j] = status;
+  //   }
+
+  //   this.setState({
+  //     status : [...this.state.status, data]
+  //   })
+
+  // }
+
+  // console.log(this.state.status);
+
 
   this.setState({
     loading : false
@@ -102,9 +127,16 @@ class App extends Component {
 
   }
 
-  addTask(content){
+  addTask(content, friend1, friend2, friend3){
     this.setState({ loading : true}); 
-    this.state.todoList.methods.createTask(content).send({ from : this.state.account })
+
+    const portis = new Portis('faad537b-c4a3-428f-b24e-6c1767c4e624', 'goerli');
+ 
+    const web3 = new Web3(portis.provider);
+
+
+
+    this.state.todoList.methods.createTask(content, '0xbbbaaD77908e7143B6b4D5922fd201cd08568f63', '0x4108424e30dfCe6E9cA41e707C2c64FA5704A01A', '0x84AF51e634494D8c4BD4BFCD170C719dCb05dB5a').send({ from:this.state.account, to:TODO_LIST_ADDRESS, value: 30000000000000000 })
     .once('receipt', (receipt) => {
       console.log(receipt);
       this.setState({ loading : false});
@@ -128,8 +160,8 @@ class App extends Component {
         <p> Your account address : {this.state.account} </p>
         <p> Your network is : {this.state.network} </p>
         <p> Task count : {this.state.taskCount} </p>
-        <p> Your Portis Acc. Balance : {this.state.balance} </p>
-
+        <p> Your Portis Acc. Balance : {this.state.balance} ETH </p>
+        <p> <strong> By default amount to be paid is 0.03 ETH </strong></p>
 
 {this.state.loading ? <h1> Loading... </h1>: <TodoList tasks={this.state.tasks} addTask= {this.addTask} deleteTask={this.deleteTask}/>}
 
