@@ -163,7 +163,7 @@ class App extends Component {
         <p> Your Portis Acc. Balance : {this.state.balance} ETH </p>
         <p> <strong> By default amount to be paid is 0.03 ETH </strong></p>
 
-{this.state.loading ? <h1> Loading... </h1>: <TodoList tasks={this.state.tasks} addTask= {this.addTask} deleteTask={this.deleteTask}/>}
+{this.state.loading ? <h1> Loading... YOLO </h1>: <TodoList tasks={this.state.tasks} addTask= {this.addTask} deleteTask={this.deleteTask}/>}
 
 
       </div>
