@@ -41,9 +41,9 @@ class TodoList extends Component {
         <h3> {key + 1} : {task.content} </h3> 
         <br />
         <div> status : 
-          <div> {task.friend1} </div> 
+          {/* <div> {task.friend1} </div> 
           <div> {task.friend2} </div> 
-          <div> {task.friend3} </div> 
+          <div> {task.friend3} </div>  */}
 
 
           </div>

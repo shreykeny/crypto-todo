@@ -9,6 +9,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import TodoList from './todoList';
 import Portis from '@portis/web3';
+import Navbar from 'react-bootstrap/Navbar';
+import Logo from './Logo.svg';
 
 
 class App extends Component {
@@ -154,19 +156,42 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h1> To do list </h1> 
+      <div> 
+        <Navbar bg="light" className="doug">
+          <Navbar.Brand href="#home">
+            <img
+            src={Logo}
+            width="120"
+            height="120"
+            className="d-inline-block align-top"
+            alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
 
-        <p> Your account address : {this.state.account} </p>
-        <p> Your network is : {this.state.network} </p>
-        <p> Task count : {this.state.taskCount} </p>
-        <p> Your Portis Acc. Balance : {this.state.balance} ETH </p>
-        <p> <strong> By default amount to be paid is 0.03 ETH </strong></p>
 
-{this.state.loading ? <h1> Loading.. </h1>: <TodoList tasks={this.state.tasks} addTask= {this.addTask} deleteTask={this.deleteTask}/>}
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+              <Button className="connected__status" active>Not connected</Button>
+            </Navbar.Text>
+          </Navbar.Collapse>
+          
+        
+        </Navbar>
 
+    
+        <div className="container">
 
+          <p> Your account address : {this.state.account} </p>
+          <p> Your network is : {this.state.network} </p>
+          <p> Task count : {this.state.taskCount} </p>
+          <p> Your Portis Acc. Balance : {this.state.balance} ETH </p>
+          <p> <strong> By default amount to be paid is 0.03 ETH </strong></p>
+
+            {this.state.loading ? <h1> Loading.. </h1>: <TodoList tasks={this.state.tasks} addTask= {this.addTask} deleteTask={this.deleteTask}/>}
+
+        </div>
       </div>
+
     );
   }
 
