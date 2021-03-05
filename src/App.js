@@ -3,14 +3,16 @@ import './App.css';
 import Web3 from 'web3';
 import {TODO_LIST_ABI, TODO_LIST_ADDRESS} from './config.js';
 
+import TodoList from './todoList';
+import Main from './main';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
-import TodoList from './todoList';
 import Portis from '@portis/web3';
 import Navbar from 'react-bootstrap/Navbar';
-import Logo from './Logo.svg';
+import Logo from './logo.svg';
 
 
 class App extends Component {
@@ -26,7 +28,8 @@ class App extends Component {
       portis : null,
       friend1 : '',
       friend2 : '', 
-      friend3 : ''
+      friend3 : '', 
+      login : false
     }
 
     this.addTask = this.addTask.bind(this);
@@ -37,9 +40,6 @@ class App extends Component {
 
 
   componentDidMount() {
-    
-
-
     this.loadBlockchainData();
   }
 
@@ -56,6 +56,14 @@ class App extends Component {
 
     web3.eth.getAccounts((error, accounts) => {
       console.log(accounts);
+    });
+
+    portis.isLoggedIn().then(({ error, result }) => {
+      // console.log(error, "rsults" + result);
+
+      this.setState({
+        login : result
+      })
     });
 
 
@@ -178,18 +186,10 @@ class App extends Component {
         
         </Navbar>
 
-    
-        <div className="container">
+        {this.state.login ? <Main state={this.state} addTask= {this.addTask} deleteTask={this.deleteTask}/>  : <h1> login </h1> }
 
-          <p> Your account address : {this.state.account} </p>
-          <p> Your network is : {this.state.network} </p>
-          <p> Task count : {this.state.taskCount} </p>
-          <p> Your Portis Acc. Balance : {this.state.balance} ETH </p>
-          <p> <strong> By default amount to be paid is 0.03 ETH </strong></p>
 
-            {this.state.loading ? <h1> Loading.. </h1>: <TodoList tasks={this.state.tasks} addTask= {this.addTask} deleteTask={this.deleteTask}/>}
 
-        </div>
       </div>
 
     );
