@@ -9,13 +9,13 @@ class Main extends Component {
 
 <div className="container">
 
-<p> Your account address : {this.props.state.account} </p>
-<p> Your network is : {this.props.state.network} </p>
-<p> Task count : {this.props.state.taskCount} </p>
-<p> Your Portis Acc. Balance : {this.props.state.balance} ETH </p>
+{/* <p> Your account address : {this.props.state.account} </p> */}
+{/* <p> Your network is : {this.props.state.network} </p> */}
+{/* <p> Task count : {this.props.state.taskCount} </p> */}
+<p> Your Acc. Balance : {this.props.state.balance} ETH </p>
 <p> <strong> By default amount to be paid is 0.03 ETH </strong></p>
 
-  {this.props.state.loading ? <h1> Loading.. </h1>: <TodoList tasks={this.props.state.tasks} addTask= {this.props.addTask} deleteTask={this.props.deleteTask}/>}
+  {this.props.state.loading ? <h1> Loading.. </h1>: <TodoList tasks={this.props.state.tasks} addTask= {this.props.addTask} deleteTask={this.props.deleteTask} status={this.props.state.status}/>}
 
 </div>
                 

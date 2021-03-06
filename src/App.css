@@ -1,31 +1,19 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+#root {
+  font-family: "Roboto Mono", monospace;
+}
+
+.web3__wallet__button {
+  background: #72aaed;
+  box-shadow: 0px 4px 25px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 28px;
+  border: none;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  color: #ffffff;
+  width: 199px;
+  height: 50px;
 }
 
 .doug {
@@ -43,6 +31,16 @@
   background: #f55a5a;
   width: 200px;
   height: 50px;
+}
+
+.connected__true {
+  background: #9ad3a3;
+  box-shadow: 0px 4px 34px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 28px;
+  border: none;
+  width: 200px;
+  height: 50px;
+  color: white;
 }
 
 .btn-primary:not(:disabled):not(.disabled):active,
@@ -74,10 +72,31 @@
   border: none;
   width: 100px;
   height: 50px;
+  color: white;
+}
+
+.todo__refresh {
+  background: #72aaed;
+  box-shadow: 0px 4px 25px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 28px;
+  border: none;
+  margin: 10px;
+  /* width: 1px; */
+  /* height: 50px; */
 }
 
 .friends {
   margin: 15px;
+}
+
+.friend__page {
+  background: #ffffff;
+  border: 4px solid #f7f8fa;
+  border-radius: 28px;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  margin: 10px;
 }
 
 @keyframes App-logo-spin {

@@ -8,8 +8,37 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+import Completed from './completed.svg'
+import WIP from './WIP.svg'
+
 
 class TodoList extends Component {
+
+  componentDidMount() {
+
+  }
+
+ constructor(props) {
+   super(props);
+   this.state = {
+     friend1 : false,
+     friend2 : false,
+     friend3 : false
+   }
+ }
+
+  checkStatus = (key) => {
+    console.log(this.props.status[key]);
+
+    setTimeout(() => {
+      this.setState({
+        friend1 : this.props.status[key].status1,
+        friend2 : this.props.status[key].status2,
+        friend3 : this.props.status[key].status3
+      })
+    }, 2000)
+
+  }
 
   render() {
     return (
@@ -38,27 +67,38 @@ class TodoList extends Component {
         </Form>
         </div>
 
+        <Row> 
+          <Col> Friend 1 : <span id="friend1__status"> {this.state.friend1 ? <span> ✅ </span> : <span> ⚙️ </span>} </span> </Col> 
+          <Col> Friend 2 : <span id="friend2__status"> {this.state.friend2 ? <span> ✅ </span> : <span> ⚙️ </span>}</span></Col> 
+          <Col> Friend 3 : <span id="friend3__status"> {this.state.friend3 ? <span> ✅ </span> : <span> ⚙️ </span>}</span></Col> 
+
+        </Row>
+
+        <br />
+
 <h2> Your Tasks </h2>
 {
-  this.props.tasks.map((task,key) => {
-    // console.log(task)
+this.props.tasks.map((task,key) => {
+    // console.log(key)
     return(
     <div key={key + 1}>
       <div className="todo-list">
         {/* <input type="checkbox" defaultChecked={task.completed} name={task.id} ref={(input) => {this.checkbox = input}} onClick={(event) => this.props.deleteTask(task.id)}/> */}
-        <h3> {key + 1} : {task.content} </h3> 
-        <br />
-        <div> status : 
-          {/* <div> {task.friend1} </div> 
-          <div> {task.friend2} </div> 
-          <div> {task.friend3} </div>  */}
+        <button className="todo__refresh" onClick={() => this.checkStatus(key)}> 🔄 </button>
+        <Col>
+          <Row>  <h3>  {key + 1}: {task.completed ? <span> <img src={Completed} width="30px" height="30px"/> </span> : <span> <img src={WIP} width="30px" height="30px"/> </span>} {task.content} </h3> </Row>
+    
+          <Col> {task.friend1} </Col> 
+          <Col>  {task.friend2} </Col> 
+          <Col>  {task.friend3} </Col> 
+       
+        </Col>
 
-
-          </div>
       </div>
     </div>
     )
   })
+
 }
 
       </div>
