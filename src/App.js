@@ -221,7 +221,8 @@ setTimeout(() => {
     this.state.todoList.methods.toggleCompleted(id).send({ from : this.state.account })
     .once('receipt', (receipt) => {
       console.log(receipt);
-      this.setState({ loading : false});
+
+      this.setState({ loading : false, message : "Done!"});
     })
   }
 
@@ -323,7 +324,7 @@ FriendSignInWithMetamask = () => {
           <Route path="/friend">
             <div> 
               {
-                this.state.login ? <Friend deleteTask={this.deleteTask}/> : <Container> 
+                this.state.login ? <Friend deleteTask={this.deleteTask} message={this.state.message}/> : <Container> 
                 
                 <button className="todo__submit" onClick={this.FriendSignInWithPortis}> Portis </button> 
                 <button className="todo__submit" onClick={this.FriendSignInWithMetamask}> Metamask</button> 

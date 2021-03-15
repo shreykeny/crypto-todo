@@ -28,6 +28,8 @@ class Friend extends Component {
 
                 <Button className="todo__submit" as="input" type="submit" value="Submit"/>{' '}
 
+                <p> {this.props.message} </p>
+
                 </Form>
                 
             </div>
